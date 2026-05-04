@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: annonce-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/annonces/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: annonceService
+                fallbackUri: forward:/fallback/annonce
+        - id: moderation-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/moderation/**
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: annonce-service
+        url: http://localhost:8081/api-docs
+      - name: moderation-service
+        url: http://localhost:8082/api-docs
