@@ -1,4 +1,4 @@
-package com.master.p2p_node.entity;
+package com.master.soa.entity;
 import jakarta.persistence.*;
 import lombok.*;
 

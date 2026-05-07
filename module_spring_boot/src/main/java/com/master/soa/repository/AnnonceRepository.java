@@ -1,6 +1,6 @@
-package com.master.p2p_node.repository;
+package com.master.soa.repository;
 
-import com.master.p2p_node.entity.Annonce;
+import com.master.soa.entity.Annonce;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
