@@ -1,14 +1,17 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swagger');
-const moderationRoutes = require('./routes/moderation.routes');
+const swaggerSpec = require('./src/config/swagger');
+const moderationRoutes = require('./src/routes/moderation.routes');
+const authRoutes = require('./src/routes/auth.routes');
+require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
 // Routes
+app.use('/auth', authRoutes);
 app.use('/moderations', moderationRoutes);
 
 // Swagger

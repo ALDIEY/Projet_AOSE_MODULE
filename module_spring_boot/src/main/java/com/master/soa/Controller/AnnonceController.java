@@ -2,6 +2,7 @@ package com.master.soa.Controller;
 
 import com.master.soa.Service.AnnonceService;
 import com.master.soa.entity.Annonce;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,17 +17,27 @@ public class AnnonceController {
     @Autowired
     private AnnonceService annonceService;
 
-    // POST /annonces - Créer une annonce (statut EN_ATTENTE)
+    // POST /annonces - Créer une annonce (statut EN_ATTENTE) avec validation
     @PostMapping
-    public ResponseEntity<Annonce> create(@RequestBody Annonce annonce) {
+    public ResponseEntity<Annonce> create(@Valid @RequestBody Annonce annonce) {
         Annonce created = annonceService.create(annonce);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    // GET /annonces - Lister toutes les annonces
+    // GET /annonces - Lister les annonces avec filtres optionnels par ville ou catégorie
     @GetMapping
-    public List<Annonce> getAll() {
-        return annonceService.getAll();
+    public ResponseEntity<List<Annonce>> getAll(
+            @RequestParam(required = false) String ville,
+            @RequestParam(required = false) String categorie) {
+        List<Annonce> annonces;
+        if (ville != null && !ville.isEmpty()) {
+            annonces = annonceService.getByVille(ville);
+        } else if (categorie != null && !categorie.isEmpty()) {
+            annonces = annonceService.getByCategorie(categorie);
+        } else {
+            annonces = annonceService.getAll();
+        }
+        return ResponseEntity.ok(annonces);
     }
 
     // GET /annonces/{id} - Détail d'une annonce
@@ -59,7 +70,7 @@ public class AnnonceController {
         }
     }
 
-    // Endpoint interne pour que moderation-service puisse rejeter l'annonce
+    // Endpoint pour que moderation-service puisse rejeter l'annonce
     @PatchMapping("/{id}/rejeter")
     public ResponseEntity<?> rejeter(@PathVariable Long id) {
         try {

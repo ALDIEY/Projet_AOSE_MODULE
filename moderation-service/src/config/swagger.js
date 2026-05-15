@@ -1,21 +1,28 @@
-const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerJSDoc = require('swagger-jsdoc');
+const path = require('path');
 
 const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'SenAnnonces - Moderation Service API',
-      version: '1.0.0',
-      description: 'API de modération des annonces'
+      title: 'Service de Modération - SenAnnonces',
+      version: '2.0.0',
+      description: 'API avec authentification JWT',
     },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Serveur de développement'
-      }
-    ]
+    servers: [{ url: 'http://localhost:3000', description: 'Local' }],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }],
   },
-  apis: ['./src/routes/*.js']
+  // 🔥 Chemin corrigé
+  apis: [path.join(__dirname, '../routes/*.js')],
 };
 
-module.exports = swaggerJsdoc(options);
+module.exports = swaggerJSDoc(options);

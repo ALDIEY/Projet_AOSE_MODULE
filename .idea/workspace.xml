@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f49db92-e4d1-4786-9e75-3ecdb838d028" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/Controller/AnnonceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/Service/AnnonceService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/entity/Annonce.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/repository/AnnonceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projet/src/main/resources/application-test.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projet/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/projet/src/test/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projet/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/Config/NodeConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/Controller/FileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/P2pNodeApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/NodeApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/src/main/java/com/master/p2p_node/Service/FileService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/src/test/java/com/master/p2p_node/P2pNodeApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/projet/src/test/java/com/master/p2p_node/P2pNodeApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/storage_node_5000/test.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet/storage_node_5001/test.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/projet" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -38,16 +23,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true"
   }
-}</component>
+}]]></component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="6f49db92-e4d1-4786-9e75-3ecdb838d028" name="Changes" comment="" />

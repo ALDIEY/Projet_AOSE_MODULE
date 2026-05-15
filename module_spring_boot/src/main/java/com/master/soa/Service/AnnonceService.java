@@ -46,14 +46,13 @@ public class AnnonceService {
             throw new RuntimeException("Seules les annonces en attente peuvent être soumises");
         }
 
-        // Appel au service de modération (Node.js) pour enregistrer la demande
-        // On lui envoie l'ID de l'annonce, il répondra plus tard via /publier ou /rejeter
-        String url = moderationUrl + "/moderations/request";
-        // On utilise un DTO simple
-        ModerationRequest request = new ModerationRequest(annonce.getId());
-        restTemplate.postForObject(url, request, String.class);
+        // Supprimez les 3 lignes suivantes :
+        // String url = moderationUrl + "/moderations/request";
+        // ModerationRequest request = new ModerationRequest(annonce.getId());
+        // restTemplate.postForObject(url, request, String.class);
 
-        // On peut aussi ne pas attendre de réponse. La modération sera asynchrone.
+        // Ajoutez simplement un log si vous voulez
+        System.out.println("Annonce " + id + " soumise à la modération (en attente de décision)");
     }
 
     // Méthode appelée par moderation-service quand l'annonce est approuvée
@@ -74,5 +73,14 @@ public class AnnonceService {
                 .orElseThrow(() -> new RuntimeException("Annonce non trouvée"));
         annonce.setStatut("REJETEE");
         return repo.save(annonce);
+    }
+
+    // Dans AnnonceService
+    public List<Annonce> getByVille(String ville) {
+        return repo.findByVille(ville);
+    }
+
+    public List<Annonce> getByCategorie(String categorie) {
+        return repo.findByCategorie(categorie);
     }
 }

@@ -1,54 +1,60 @@
 const express = require('express');
 const router = express.Router();
-const moderationService = require('../services/moderation.service');
+const moderationController = require('../controller/moderation.controller');
+const authenticateToken = require('../middleware/auth');
+const { validateId, validateReject } = require('../middleware/validation');
+
+// ---------- Toutes les routes ci-dessous sont protégées par JWT ----------
+router.use(authenticateToken);
 
 /**
  * @swagger
  * /moderations/{annonceId}/approve:
  *   patch:
- *     summary: Approuver une annonce
+ *    
  *     tags: [Modération]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: annonceId
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID de l'annonce à approuver
  *     responses:
  *       200:
- *         description: Annonce approuvée
+ *         description: Annonce approuvée et publiée
+ *       400:
+ *         description: ID invalide
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Token invalide ou expiré
+ *       404:
+ *         description: Annonce introuvable
+ *       500:
+ *         description: Erreur serveur
  */
-
-
-// PATCH /moderations/:annonceId/approve
-router.patch('/:annonceId/approve', async (req, res) => {
-  const { annonceId } = req.params;
-  
-  try {
-    const decision = await moderationService.approuver(annonceId);
-    res.json({
-      message: `Annonce ${annonceId} approuvée`,
-      decision
-    });
-  } catch (err) {
-    res.status(500).json({ erreur: err.message });
-  }
-});
+router.patch('/:annonceId/approve', validateId, moderationController.approve);
 
 /**
  * @swagger
  * /moderations/{annonceId}/reject:
  *   patch:
- *     summary: Rejeter une annonce
+ *    
  *     tags: [Modération]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: annonceId
  *         required: true
  *         schema:
  *           type: integer
+ *         description: ID de l'annonce à rejeter
  *     requestBody:
- *       required: true
+ *       required: false
  *       content:
  *         application/json:
  *           schema:
@@ -56,26 +62,47 @@ router.patch('/:annonceId/approve', async (req, res) => {
  *             properties:
  *               motif:
  *                 type: string
- *                 description: Motif du rejet
+ *                 maxLength: 200
+ *                 description: Motif du rejet (optionnel)
  *     responses:
  *       200:
  *         description: Annonce rejetée
+ *       400:
+ *         description: ID invalide ou motif trop long
+ *       401:
+ *         description: Non authentifié
+ *       403:
+ *         description: Token invalide ou expiré
+ *       404:
+ *         description: Annonce introuvable
+ *       500:
+ *         description: Erreur serveur
  */
+router.patch('/:annonceId/reject', validateId, validateReject, moderationController.reject);
 
-// PATCH /moderations/:annonceId/reject
-router.patch('/:annonceId/reject', async (req, res) => {
-  const { annonceId } = req.params;
-  const { motif } = req.body;
-
-  try {
-    const decision = await moderationService.rejeter(annonceId, motif);
-    res.json({
-      message: `Annonce ${annonceId} rejetée`,
-      decision
-    });
-  } catch (err) {
-    res.status(500).json({ erreur: err.message });
-  }
-});
+/**
+ * @swagger
+ * /moderations/decisions:
+ *   get:
+ *    
+ *     tags: [Modération]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des décisions
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   annonceId: { type: integer }
+ *                   decision: { type: string }
+ *                   date: { type: string }
+ *                   motif: { type: string }
+ */
+router.get('/decisions', moderationController.getAllDecisions);
 
 module.exports = router;
